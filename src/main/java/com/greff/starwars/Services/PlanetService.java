@@ -22,13 +22,19 @@ public class PlanetService {
     public Planet findById(String id){
         return repo.findById(id).orElseThrow();
     }
-
     public Planet insert(PlanetDTO dto){
         return repo.save(dto.fromDTO());
     }
-
     public void delete(String id){
         repo.deleteById(id);
+    }
+    public void update(String id, PlanetDTO planetDTO){
+        Planet newPlanet = findById(id);
+        newPlanet.setName(planetDTO.getName());
+        newPlanet.setClimate(planetDTO.getClimate());
+        newPlanet.setTerrain(planetDTO.getTerrain());
+        newPlanet.setTotalAppearances(planetDTO.getNumberOfFilms());
+        repo.save(newPlanet);
     }
 
 

@@ -9,12 +9,10 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlanetDTO implements Serializable {
-
     private String name;
     private String climate;
     private String terrain;
     private List<String> films = new ArrayList<>();
-
 
     public PlanetDTO() {
     }
@@ -55,7 +53,6 @@ public class PlanetDTO implements Serializable {
     }
 
     public Planet fromDTO(){
-        Planet planet = new Planet(null, getName(),getClimate(), getTerrain(), getNumberOfFilms());
-        return planet;
+        return new Planet(null, getName(),getClimate(), getTerrain(), getNumberOfFilms());
     }
 }

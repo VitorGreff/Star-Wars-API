@@ -49,4 +49,10 @@ public class PlanetController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody PlanetDTO planetDTO, @PathVariable String id){
+        service.update(id, planetDTO);
+        return ResponseEntity.ok().build();
+    }
+
 }

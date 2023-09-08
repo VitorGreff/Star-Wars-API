@@ -13,36 +13,33 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @Profile("dev")
-public class instantiation implements CommandLineRunner {
+public class Instantiation implements CommandLineRunner {
     @Autowired
     PlanetRepository repo;
-
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         repo.deleteAll();
         RestTemplate restTemplate = new RestTemplate();
         ObjectMapper objectMapper = new ObjectMapper();
         String url1 = "https://swapi.dev/api/planets/?format=json";
-        Integer count = null;
         String url2 = "https://swapi.dev/api/planets/";
-        String result2;
-
         try{
-            String result1 = restTemplate.getForObject(url1, String.class);
-            JsonObject jsonObject = JsonParser.parseString(result1).getAsJsonObject();
-            count = jsonObject.get("count").getAsInt();
+            String json1 = restTemplate.getForObject(url1, String.class);
+            JsonObject jsonObject = JsonParser.parseString(json1).getAsJsonObject();
+            String json2;
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        if(count != null){
-            PlanetDTO planet;
-            for(int i = 1; i <= 10; i++){
-                result2 = restTemplate.getForObject(url2 + i + "/?format=json", String.class);
-                planet = objectMapper.readValue(result2,PlanetDTO.class);
-                repo.save(planet.fromDTO());
+            for(int i = 1; i <= jsonObject.get("count").getAsInt(); i++){
+                try {
+                    json2 = restTemplate.getForObject(url2 + i + "/?format=json", String.class);
+                    repo.save(objectMapper.readValue(json2, PlanetDTO.class).fromDTO());
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
