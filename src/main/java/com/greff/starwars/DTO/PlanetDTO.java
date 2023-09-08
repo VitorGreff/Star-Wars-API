@@ -1,8 +1,11 @@
 package com.greff.starwars.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.greff.starwars.Domain.Planet;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlanetDTO implements Serializable {
@@ -10,6 +13,8 @@ public class PlanetDTO implements Serializable {
     private String name;
     private String climate;
     private String terrain;
+    private List<String> films = new ArrayList<>();
+
 
     public PlanetDTO() {
     }
@@ -19,7 +24,12 @@ public class PlanetDTO implements Serializable {
         this.climate = climate;
         this.terrain = terrain;
     }
-
+    public List<String> getFilms() {
+        return films;
+    }
+    public Integer getNumberOfFilms(){
+        return getFilms().size();
+    }
     public String getName() {
         return name;
     }
@@ -44,4 +54,8 @@ public class PlanetDTO implements Serializable {
         this.terrain = terrain;
     }
 
+    public Planet fromDTO(){
+        Planet planet = new Planet(null, getName(),getClimate(), getTerrain(), getNumberOfFilms());
+        return planet;
+    }
 }

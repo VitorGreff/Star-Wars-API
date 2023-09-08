@@ -1,6 +1,8 @@
 package com.greff.starwars.Config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.greff.starwars.DTO.PlanetDTO;
 import com.greff.starwars.Repositories.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +19,30 @@ public class instantiation implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        repo.deleteAll();
-//        Planet p1 = new Planet(null, "terra","quente","normal",0);
-//        Planet p2 = new Planet(null, "mater","frio","areia",3);
-//        repo.saveAll(Arrays.asList(p1,p2));
-
-        String url = "https://swapi.dev/api/planets/1/?format=json";
+        repo.deleteAll();
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(url, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String url1 = "https://swapi.dev/api/planets/?format=json";
+        Integer count = null;
+        String url2 = "https://swapi.dev/api/planets/";
+        String result2;
 
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            PlanetDTO planet = objectMapper.readValue(result, PlanetDTO.class);
+        try{
+            String result1 = restTemplate.getForObject(url1, String.class);
+            JsonObject jsonObject = JsonParser.parseString(result1).getAsJsonObject();
+            count = jsonObject.get("count").getAsInt();
 
-            // Agora você tem um objeto Planet com os campos desejados
-            System.out.println("Name: " + planet.getName());
-            System.out.println("Climate: " + planet.getClimate());
-            System.out.println("Terrain: " + planet.getTerrain());
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
+        }
+
+        if(count != null){
+            PlanetDTO planet;
+            for(int i = 1; i <= 10; i++){
+                result2 = restTemplate.getForObject(url2 + i + "/?format=json", String.class);
+                planet = objectMapper.readValue(result2,PlanetDTO.class);
+                repo.save(planet.fromDTO());
+            }
         }
     }
 }

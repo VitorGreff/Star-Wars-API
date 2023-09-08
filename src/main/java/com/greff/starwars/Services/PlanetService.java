@@ -24,12 +24,7 @@ public class PlanetService {
     }
 
     public Planet insert(PlanetDTO dto){
-        return repo.save(fromDTO(dto));
-    }
-
-    public Planet fromDTO(PlanetDTO dto){
-        Planet planet = new Planet(null, dto.getName(),dto.getClimate(), dto.getTerrain(), 0);
-        return planet;
+        return repo.save(dto.fromDTO());
     }
 
     public void delete(String id){
