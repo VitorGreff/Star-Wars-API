@@ -1,11 +1,9 @@
 package com.greff.starwars.Services;
 
 import com.greff.starwars.Domain.Planet;
-import com.greff.starwars.Domain.PlanetDTO;
+import com.greff.starwars.DTO.PlanetDTO;
 import com.greff.starwars.Repositories.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,14 +16,14 @@ public class PlanetService {
     public List<Planet> findAll(){
         return repo.findAll();
     }
-    public Planet findByName(@Param("name") String name){
+    public Planet findByName(String name){
         return repo.findByName(name);
     }
     public Planet findById(String id){
         return repo.findById(id).orElseThrow();
     }
 
-    public Planet insertPlanet(PlanetDTO dto){
+    public Planet insert(PlanetDTO dto){
         return repo.save(fromDTO(dto));
     }
 
@@ -33,5 +31,10 @@ public class PlanetService {
         Planet planet = new Planet(null, dto.getName(),dto.getClimate(), dto.getTerrain(), 0);
         return planet;
     }
+
+    public void delete(String id){
+        repo.deleteById(id);
+    }
+
 
 }

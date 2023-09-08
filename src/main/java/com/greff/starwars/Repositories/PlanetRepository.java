@@ -1,7 +1,6 @@
 package com.greff.starwars.Repositories;
 
 import com.greff.starwars.Domain.Planet;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

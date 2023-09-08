@@ -1,7 +1,7 @@
 package com.greff.starwars.Controllers;
 
+import com.greff.starwars.DTO.PlanetDTO;
 import com.greff.starwars.Domain.Planet;
-import com.greff.starwars.Domain.PlanetDTO;
 import com.greff.starwars.Services.PlanetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +24,8 @@ public class PlanetController {
         return ResponseEntity.ok().body(planets);
     }
 
-    @GetMapping(value = "/name/{name}")
-    public ResponseEntity<Planet> finByName(@PathVariable String name){
+    @GetMapping(value = "/find")
+    public ResponseEntity<Planet> finByName(@RequestParam("name") String name){
         Planet planet = service.findByName(name);
         return ResponseEntity.ok().body(planet);
     }
@@ -37,11 +37,16 @@ public class PlanetController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insertPlanet(@RequestBody PlanetDTO planetDTO){
-        Planet newPlanet = service.insertPlanet(planetDTO);
+    public ResponseEntity<Void> insert(@RequestBody PlanetDTO planetDTO){
+        Planet newPlanet = service.insert(planetDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(newPlanet.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id){
+        service.delete(id);
+        return ResponseEntity.ok().build();
+    }
 
 }

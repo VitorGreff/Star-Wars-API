@@ -1,10 +1,10 @@
-package com.greff.starwars.Domain;
+package com.greff.starwars.DTO;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
-import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlanetDTO implements Serializable {
 
     private String name;
