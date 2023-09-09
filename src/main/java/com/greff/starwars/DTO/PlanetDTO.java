@@ -55,4 +55,14 @@ public class PlanetDTO implements Serializable {
     public Planet fromDTO(){
         return new Planet(null, getName(),getClimate(), getTerrain(), getNumberOfFilms());
     }
+
+    @Override
+    public String toString() {
+        return "PlanetDTO{" +
+                "name='" + name + '\'' +
+                ", climate='" + climate + '\'' +
+                ", terrain='" + terrain + '\'' +
+                ", films=" + films +
+                '}';
+    }
 }
