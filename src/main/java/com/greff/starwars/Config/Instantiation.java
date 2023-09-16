@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Configuration
-@Profile("dev")
+@Profile("test")
 public class Instantiation implements CommandLineRunner {
     @Autowired
     PlanetRepository repo;
