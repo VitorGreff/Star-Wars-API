@@ -1,5 +1,4 @@
 package com.greff.starwars.Controllers;
-
 import com.greff.starwars.DTO.PlanetDTO;
 import com.greff.starwars.Domain.Planet;
 import com.greff.starwars.Services.PlanetService;
@@ -8,10 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
-
 @Controller
 @RequestMapping(value = "/planets")
 public class PlanetController {

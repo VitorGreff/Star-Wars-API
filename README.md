@@ -15,7 +15,7 @@ It is important to notice that, although it wasn't needed, I populated the datab
 
 So everytime you run the application, either on dev or test profile, 6 requests will be made to the external api to populate the database. 
 
-This was not part of the challenge but I really thought that would be a good exercise to overcome as I was obligated to read about json trees and stuff like that.
+This was not part of the challenge but, I really thought that would be a good exercise to overcome as I was obligated to read about json trees and stuff like that.
 
 ## References
 https://github.com/AmeDigital/challenge-back-end-hit

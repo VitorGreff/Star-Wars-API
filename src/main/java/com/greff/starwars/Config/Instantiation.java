@@ -39,7 +39,7 @@ public class Instantiation implements CommandLineRunner {
                     planets.add(planet);
                 }
             }
-            repo.saveAll(planets.stream().map(x -> x.fromDTO()).collect(Collectors.toList()));
+            repo.saveAll(planets.stream().map(PlanetDTO::fromDTO).collect(Collectors.toList()));
         }
         catch (Exception e){
             e.printStackTrace();
