@@ -20,6 +20,6 @@ This was not part of the challenge but I really thought that would be a good exe
 ## References
 https://github.com/AmeDigital/challenge-back-end-hit
 
-https://github.com/google/gson
+https://www.baeldung.com/jackson-json-node-tree-model
 
 https://github.com/CollabCodeTech/backend-challenges
