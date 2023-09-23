@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 @Profile("test")
-public class Instantiation implements CommandLineRunner {
+public class InstantiationTest implements CommandLineRunner {
     @Autowired
     PlanetRepository repo;
     @Override
